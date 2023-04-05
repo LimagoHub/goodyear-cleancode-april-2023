@@ -2,5 +2,8 @@ package de.goodyear.game;
 
 public interface Game {
 
-    void play();
+    /**
+     *
+     */
+    public abstract void play();
 }

@@ -1,0 +1,10 @@
+
+7
+java:S1220""Move this file to a named package.8•ÿ‡€Ù0
+]	java:S125"<This block of commented-out lines of code should be removed.(Àá≈éˇˇˇˇˇ8±ÿ‡€Ù0
+U	java:S106!"9Replace this use of System.out or System.err by a logger.(¡™è¯8≥ÿ‡€Ù0
+U	java:S106*"9Replace this use of System.out or System.err by a logger.(ñˆüõ8ôö·€Ù0
+d
+java:S20949"BRemove this empty class, write its code or make it an "interface".(ÆÖãÚ¸ˇˇˇˇ8¥ÿ‡€Ù0
+d
+java:S2094H"BRemove this empty class, write its code or make it an "interface".(ﬂ≤Ç˜˘ˇˇˇˇ8µÿ‡€Ù0

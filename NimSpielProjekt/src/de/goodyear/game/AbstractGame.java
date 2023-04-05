@@ -1,6 +1,7 @@
 package de.goodyear.game;
 
 import de.goodyear.game.player.Player;
+import de.goodyear.io.Writer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,6 +13,12 @@ public abstract class AbstractGame <BOARD, TURN> implements Game{
     private BOARD board;
 
     private TURN turn;
+
+    private final Writer writer;
+
+    public AbstractGame(final Writer writer) {
+        this.writer = writer;
+    }
 
     private List<Player<BOARD,TURN>> players = new ArrayList<>();
     private Player<BOARD,TURN> currentPlayer;
@@ -53,33 +60,37 @@ public abstract class AbstractGame <BOARD, TURN> implements Game{
     }
 
 
-
-
+    /**
+     *
+     */
     @Override
     public void play() {
-        while ( ! isGameover()) {
-            playRounds();
-        }
+        while ( ! isGameover()) playRounds();
     }
 
     private void playRounds() {
-        for(var player : players) {
-            setCurrentPlayer(player);
-            playSingleTurn();
-        }
+        for(var player : players) prepareAndPlayTurn(player);
+    }
+
+    private void prepareAndPlayTurn(Player<BOARD, TURN> player) {
+        setCurrentPlayer(player);
+        playSingleTurn();
     }
 
     private void playSingleTurn() {
-        if(isGameover()) return;
-        executeTurnForCurrentPlayer();
+        if(initTurn()) return;
+        tryTurnUntilItIsValid();
         terminateTurn();
     }
 
-    private void executeTurnForCurrentPlayer() {
+    private boolean initTurn() { // Retval nur status
+        prepare();
+        return isGameover();
+    }
 
-        do {
-            turn = getCurrentPlayer().doTurn(board);
-        } while(turnIsInvalid());
+    private void tryTurnUntilItIsValid() {
+        // TODO Finde besseren Methodennamen
+        do turn = getCurrentPlayer().doTurn(board); while(turnIsInvalid());
     }
     private void terminateTurn( ) {// Integration
         updateBoard();
@@ -87,22 +98,26 @@ public abstract class AbstractGame <BOARD, TURN> implements Game{
     }
 
     private boolean turnIsInvalid() {
-        if(isTurnValid()) {
-            return false;
-        }
-        System.out.println("Ungueltiger Zug");
+        if(isTurnValid()) return false;
+        write("Ungueltiger Zug");
         return true;
     }
 
     private void printGameOverMessageIfGameIsOver() {
-        if (isGameover()) {
-            System.out.println(getCurrentPlayer().getName() +  " hat verloren");
-        }
+        if (isGameover()) write(getCurrentPlayer().getName() +  " hat verloren");
+
     }
 
+    protected void prepare() {
+        // NOP
+    }
+    protected void write(String message) {
+        writer.write(message);
+    }
     protected abstract boolean isTurnValid();
     protected abstract void updateBoard() ;
 
     protected abstract  boolean isGameover();
+
 
 }
