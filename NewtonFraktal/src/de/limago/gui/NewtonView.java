@@ -15,7 +15,7 @@ import java.util.Stack;
 
 public class NewtonView extends Frame {
 
-    private static final int SIZE = 1024;
+    private static final int SIZE = 512;
 
 
     private Newton newton = new Newton();

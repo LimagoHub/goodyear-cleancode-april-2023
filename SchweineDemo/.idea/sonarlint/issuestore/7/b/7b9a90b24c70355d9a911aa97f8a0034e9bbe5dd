@@ -1,0 +1,7 @@
+
+g	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8şÊ½­õ0
+{
+java:S2142"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(ä ¹€8Ë½­õ0
+c
+java:S3078"AUse an "AtomicInteger" for this field; its operations are atomic.(öù¼şÿÿÿÿ8× È­õ0
+X	java:S1253"<This block of commented-out lines of code should be removed.(òÈÙÒ8“Ë½­õ0

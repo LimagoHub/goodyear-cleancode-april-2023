@@ -1,0 +1,19 @@
+
+g	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8üš‡°õ0
+g	java:S112+"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8ıš‡°õ0
+7
+java:S1220""Move this file to a named package.8ıš‡°õ0
+_
+java:S1854"=Remove this useless assignment to local variable "ergebnis1".(àü§šşÿÿÿÿ8å”Œ°õ0
+Z
+java:S1854"=Remove this useless assignment to local variable "ergebnis2".(éª¾«8çö°õ0
+{
+java:S2142"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(”ı¾8„›‡°õ0
+]	java:S125"<This block of commented-out lines of code should be removed.(‚…¬Áøÿÿÿÿ8…›‡°õ0
+P
+java:S1481".Remove this unused "ergebnis1" local variable.(àü§šşÿÿÿÿ8è”Œ°õ0
+K
+java:S1481".Remove this unused "ergebnis2" local variable.(éª¾«8éö°õ0
+{
+java:S2142*"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(ä ¹€8‰›‡°õ0
+Z	java:S106)"9Replace this use of System.out or System.err by a logger.(ÙĞõÚÿÿÿÿÿ8‰›‡°õ0

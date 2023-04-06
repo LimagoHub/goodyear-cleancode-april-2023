@@ -10,18 +10,20 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
-import java.util.Stack;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 
 
 public class MandelbrotView extends Frame {
 
-    private static final int SIZE = 2048;
+    private static final int SIZE = 512;
 
 
-    private Mandelbrot mandelbrot = new Mandelbrot();
+    private transient Mandelbrot mandelbrot = new Mandelbrot();
 
-    //private final BufferedImage image = new BufferedImage(SIZE,SIZE, BufferedImage.TYPE_INT_RGB);
+
 
     public MandelbrotView() {
         addMouseListener(new MyMouseListener());
@@ -35,6 +37,7 @@ public class MandelbrotView extends Frame {
         });
 
 
+
     }
 
 
@@ -43,7 +46,8 @@ public class MandelbrotView extends Frame {
     @Override
     public void paint(Graphics g) {
 
-        long ende, start = System.currentTimeMillis();
+        long ende;
+        long start = System.currentTimeMillis();
         for(int x = 0 ; x < SIZE ; x ++ ){
             for(int y = 0; y < SIZE; y ++) {
                 int i = mandelbrot.iterate(mandelbrot.createC(x, y, SIZE));
@@ -63,7 +67,7 @@ public class MandelbrotView extends Frame {
 
     class MyMouseListener extends MouseAdapter {
         Complex linkeUntereEcke ;
-        Stack<Mandelbrot> stack = new Stack<Mandelbrot>();
+        Deque<Mandelbrot> stack = new ArrayDeque<>();
         @Override
         public void mousePressed(MouseEvent e) {
             linkeUntereEcke = mandelbrot.createC(e.getX(), e.getY(), SIZE);
