@@ -1,31 +1,38 @@
 package uebung;
 
+import uebung.client.ArrayClient;
+import uebung.generator.GeneratorBuilder;
+import uebung.generator.RandomGeneratorBuilderImpl;
+import uebung.time.BenchmarkProxy;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Random;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 
     private int feld[] = new int[Integer.MAX_VALUE/2];
+    private int runningThreads;
+    private ExecutorService service;
 
     public static void main(String[] args) {
+        for (int runningThreads = 1; runningThreads <= Runtime.getRuntime().availableProcessors()+1 ; runningThreads++) {
+            GeneratorBuilder generatorBuilder = new RandomGeneratorBuilderImpl();
+            ArrayService arrayService = new ParallelArrayServiceImpl(generatorBuilder,runningThreads);
 
+            arrayService = (ArrayService) BenchmarkProxy.newInstance(arrayService);
 
-        new Main().run();
-    }
-
-    private void run() {
-        for (int runningThreads = 1; runningThreads <= Runtime.getRuntime().availableProcessors() ; runningThreads++) {
-            System.out.println("Start...");
-            Random random = new Random();
-            var start = Instant.now();
-            for (int i = 0; i < feld.length; i++) {
-                feld[i] = random.nextInt();
-            }
-            var ende = Instant.now();
-            var duration = Duration.between(start, ende);
-            System.out.println("Duration = " + duration.toMillis());
+            ArrayClient client = new ArrayClient(arrayService);
+            client.doSomethingWithFilledArray();
         }
 
+
+       // new Main().run();
     }
+
+
 }
